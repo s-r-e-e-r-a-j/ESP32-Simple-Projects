@@ -1,5 +1,5 @@
 ## Components Required
-- Esp32
+- Esp32 Microcontroller
 - HC-SR04 Ultrasonic Sound Distance Sensor
 - Buzzer
 - Led
