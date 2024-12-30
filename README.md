@@ -1,1 +1,1 @@
-## Simple Beginner Projects Using Esp32 Microcontroller
+## Simple Esp32 Projects For Beginners
