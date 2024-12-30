@@ -1,35 +1,42 @@
+int pin_trig = 33;
+int pin_echo = 23;
+int buzzerpin = 2;
+int ledpin = 4;
 
-int pin_trig=33;
-int pin_echo=23;
-int buzzerpin=2;
-int ledpin=4;
 long duration;
 int distance;
 
 void setup() {
-  
   pinMode(pin_trig, OUTPUT);
   pinMode(pin_echo, INPUT);
   pinMode(buzzerpin, OUTPUT);
   pinMode(ledpin, OUTPUT);
-
 }
 
 void loop() {
-  
+  // Trigger the HC-SR04
   digitalWrite(pin_trig, LOW);
-  delayMicroseconds(9);
-  digitalWrite(pin_trig, HIGH);
   delayMicroseconds(2);
+  digitalWrite(pin_trig, HIGH);
+  delayMicroseconds(10); 
   digitalWrite(pin_trig, LOW);
-  duration=pulseIn(pin_echo, HIGH);
-  distance=duration*0.034/2;
-  if(distance < 30){
-    tone(buzzerpin,262,250);
+
+  // Measure the echo pulse
+  duration = pulseIn(pin_echo, HIGH, 30000); // 30 ms timeout for 400 cm
+  if (duration == 0) {
+    distance = -1; // No echo detected
+  } else {
+    distance = duration / 58; // Convert duration to distance in cm
+  }
+
+  // Check distance and activate/deactivate buzzer and LED
+  if (distance > 0 && distance < 30) {
+    tone(buzzerpin, 262, 250); // Play buzzer
     digitalWrite(ledpin, HIGH);
-  }else{
-    noTone(buzzerpin);
+  } else {
+    noTone(buzzerpin); // Stop buzzer
     digitalWrite(ledpin, LOW);
   }
 
+  delay(100); // Add a short delay to stabilize readings
 }
