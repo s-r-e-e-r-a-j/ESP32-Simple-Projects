@@ -1,3 +1,5 @@
+## Motion Detecter
+motion detecter is a motion detection project using an Esp32 board and PIR sensor
 ## Components Required
 - Esp32 Microcontroller
 - PIR(passive Infrared ) Sensor
